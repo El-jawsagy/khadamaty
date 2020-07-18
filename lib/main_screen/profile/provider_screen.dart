@@ -8,6 +8,8 @@ import 'package:khadamaty/main_screen/service.dart';
 import 'package:khadamaty/utilities/SimilarWidgets.dart';
 import 'package:khadamaty/utilities/theme_const.dart';
 
+import '../bank_numbers_screen.dart';
+
 class ProviderScreen extends StatefulWidget {
   bool lang;
   User user;
@@ -26,7 +28,6 @@ class _ProviderScreenState extends State<ProviderScreen>
   @override
   void initState() {
     profileApi = ProfileApi();
-
     super.initState();
   }
 
@@ -99,8 +100,7 @@ class _ProviderScreenState extends State<ProviderScreen>
                     child: FlatButton(
                       onPressed: () {
                         // TODO: implement validate function
-                        // validateForm();
-                        //validateForm();
+
                         validateForm();
                       },
                       child: Text(
@@ -365,14 +365,9 @@ class _ProviderScreenState extends State<ProviderScreen>
     await makeOrder(widget.service.id, widget.user.id).then((val) {
       if (val == 'true') {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => MainScreen(0, widget.lang)));
+            builder: (context) => BankNumber(widget.lang)));
 
-        showDialogWidget(
-            widget.lang != true
-                ? "Your Order is placed successfully, We will contact with you as soon as possible"
-                : "تم ارسال الطلب بنجاح, سوف نتواصل معك",
-            context);
-      } else {
+        } else {
         showDialogWidget(
             widget.lang != true
                 ? "Your Order is failed please try again"
